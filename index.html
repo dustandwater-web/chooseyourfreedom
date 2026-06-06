@@ -30,7 +30,6 @@
       overflow: hidden;
     }
  
-    /* Subtle grain texture */
     body::before {
       content: '';
       position: fixed;
@@ -77,24 +76,14 @@
       width: 40px;
       height: 40px;
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      top: 12px;
+      left: 12px;
       animation: spin 5s linear infinite reverse;
       color: var(--ink);
       opacity: 0.3;
     }
  
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
- 
-    .gear-inner {
-      transform-origin: center center;
-      position: absolute;
-      top: 12px;
-      left: 12px;
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
  
     h1 {
       font-family: 'Fraunces', serif;
@@ -107,10 +96,7 @@
       animation: fadeUp 0.8s ease 0.5s forwards;
     }
  
-    h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
+    h1 em { font-style: italic; color: var(--accent); }
  
     .divider {
       width: 40px;
@@ -131,6 +117,16 @@
       animation: fadeUp 0.8s ease 0.8s forwards;
     }
  
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 1s forwards;
+    }
+ 
     .status {
       display: inline-flex;
       align-items: center;
@@ -142,8 +138,6 @@
       border: 1px solid var(--line);
       padding: 0.5rem 1rem;
       border-radius: 2px;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 1s forwards;
     }
  
     .dot {
@@ -153,6 +147,19 @@
       background: var(--accent);
       animation: pulse 2s ease-in-out infinite;
     }
+ 
+    .contact-link {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 1px;
+      transition: opacity 0.2s;
+    }
+ 
+    .contact-link:hover { opacity: 0.6; }
  
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
@@ -164,7 +171,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
  
-    /* Decorative corner marks */
     .corner {
       position: fixed;
       width: 20px;
@@ -180,7 +186,6 @@
   </style>
 </head>
 <body>
- 
   <div class="corner corner-tl"></div>
   <div class="corner corner-tr"></div>
   <div class="corner corner-bl"></div>
@@ -209,11 +214,13 @@
       Merci de votre patience — revenez nous voir prochainement.
     </p>
  
-    <span class="status">
-      <span class="dot"></span>
-      En construction
-    </span>
+    <div class="actions">
+      <span class="status">
+        <span class="dot"></span>
+        En construction
+      </span>
+      <a href="contact.html" class="contact-link">Nous contacter</a>
+    </div>
   </div>
- 
 </body>
 </html>

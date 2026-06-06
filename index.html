@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site en travaux</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=Fraunces:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+    :root {
+      --bg: #f5f0e8;
+      --ink: #1a1814;
+      --accent: #c8440a;
+      --muted: #8a8070;
+      --line: #d4cdc0;
+    }
+ 
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Mono', monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      overflow: hidden;
+    }
+ 
+    /* Subtle grain texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+ 
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+    }
+ 
+    .label {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+ 
+    .gear-wrap {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.4s forwards;
+    }
+ 
+    .gear {
+      width: 64px;
+      height: 64px;
+      animation: spin 8s linear infinite;
+      color: var(--accent);
+    }
+ 
+    .gear-inner {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: spin 5s linear infinite reverse;
+      color: var(--ink);
+      opacity: 0.3;
+    }
+ 
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+ 
+    .gear-inner {
+      transform-origin: center center;
+      position: absolute;
+      top: 12px;
+      left: 12px;
+    }
+ 
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: clamp(2.2rem, 6vw, 3.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.5s forwards;
+    }
+ 
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+ 
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--line);
+      margin: 1.5rem auto;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.7s forwards;
+    }
+ 
+    .message {
+      font-size: 0.82rem;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 380px;
+      margin: 0 auto 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.8s forwards;
+    }
+ 
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      padding: 0.5rem 1rem;
+      border-radius: 2px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 1s forwards;
+    }
+ 
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+ 
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+ 
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+ 
+    /* Decorative corner marks */
+    .corner {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border-color: var(--line);
+      border-style: solid;
+      opacity: 0.6;
+    }
+    .corner-tl { top: 1.5rem; left: 1.5rem; border-width: 1px 0 0 1px; }
+    .corner-tr { top: 1.5rem; right: 1.5rem; border-width: 1px 1px 0 0; }
+    .corner-bl { bottom: 1.5rem; left: 1.5rem; border-width: 0 0 1px 1px; }
+    .corner-br { bottom: 1.5rem; right: 1.5rem; border-width: 0 1px 1px 0; }
+  </style>
+</head>
+<body>
+ 
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+ 
+  <div class="container">
+    <p class="label">Travaux en cours</p>
+ 
+    <div class="gear-wrap">
+      <svg class="gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+        <path d="M19.622 10.395l-1.097-2.65L20 6l-2-2-1.735 1.483-2.707-1.113L12.935 2h-1.954l-.632 2.401-2.645 1.115L6 4 4 6l1.453 1.789-1.08 2.657L2 11v2l2.401.655 1.115 2.645L4 18l2 2 1.793-1.45 2.655 1.08L11 22h2l.604-2.401 2.65-1.098L18 20l2-2-1.453-1.789 1.098-2.657L22 13v-2l-2.378-.605Z"/>
+      </svg>
+      <svg class="gear-inner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+        <path d="M19.622 10.395l-1.097-2.65L20 6l-2-2-1.735 1.483-2.707-1.113L12.935 2h-1.954l-.632 2.401-2.645 1.115L6 4 4 6l1.453 1.789-1.08 2.657L2 11v2l2.401.655 1.115 2.645L4 18l2 2 1.793-1.45 2.655 1.08L11 22h2l.604-2.401 2.65-1.098L18 20l2-2-1.453-1.789 1.098-2.657L22 13v-2l-2.378-.605Z"/>
+      </svg>
+    </div>
+ 
+    <h1>Notre site arrive<br><em>bientôt</em></h1>
+ 
+    <div class="divider"></div>
+ 
+    <p class="message">
+      Nous travaillons à la construction de quelque chose de bien.<br>
+      Merci de votre patience — revenez nous voir prochainement.
+    </p>
+ 
+    <span class="status">
+      <span class="dot"></span>
+      En construction
+    </span>
+  </div>
+ 
+</body>
+</html>
